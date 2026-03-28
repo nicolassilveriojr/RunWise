@@ -1,2 +1,9 @@
 node_modules/
 .env
+
+backend/Lib/
+backend/Scripts/
+python-api/venv/
+**/__pycache__/
+*.pyc
+venv/
