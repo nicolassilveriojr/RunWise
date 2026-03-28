@@ -59,3 +59,25 @@ document.addEventListener('click', function(e) {
     document.getElementById('lang-dropdown').classList.remove('open');
   }
 });
+
+
+/* =============================================
+   🔌 CONEXÃO COM O BACK-END (PYTHON)
+   ============================================= */
+
+// URL base do seu servidor Python local
+const API_URL = 'http://127.0.0.1:5000/api';
+
+async function testarConexao() {
+    try {
+        console.log("Tentando conectar com o servidor...");
+        const resposta = await fetch(`${API_URL}/status`);
+        const dados = await resposta.json();
+        console.log("✅ RESPOSTA DO SERVIDOR:", dados.mensagem);
+    } catch (erro) {
+        console.error("❌ ERRO DE CONEXÃO: O servidor Python está ligado?", erro);
+    }
+}
+
+// Roda o teste de conexão
+testarConexao();

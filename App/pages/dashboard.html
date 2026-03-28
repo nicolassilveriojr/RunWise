@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - RunWise</title>
+    <link rel="stylesheet" href="CSS/dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <!-- Mobile Menu Toggle -->
+    <button class="menu-toggle" id="menuToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <div class="app-container">
+      <!-- MENU LATERAL -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <img src="Assets/logo.png" alt="RunWise" class="logo" />
+          <h2>RunWise</h2>
+        </div>
+        <nav class="sidebar-nav">
+          <ul>
+            <li>
+              <a href="dashboard.html" class="active"
+                ><i class="fas fa-home"></i> Dashboard</a
+              >
+            </li>
+            <li>
+              <a href="financeiro.html"
+                ><i class="fas fa-dollar-sign"></i> Financeiro</a
+              >
+            </li>
+            <li>
+              <a href="Produto.html"><i class="fas fa-box"></i> Produtos</a>
+            </li>
+            <li>
+              <a href="assistente.html"
+                ><i class="fas fa-robot"></i> Assistente IA</a
+              >
+            </li>
+            <li>
+              <a href="Relatorio.html"
+                ><i class="fas fa-chart-bar"></i> Relatórios</a
+              >
+            </li>
+            <li>
+              <a href="Perfil.html"><i class="fas fa-user"></i> Perfil</a>
+            </li>
+            <li>
+              <a href="index.html" class="logout"
+                ><i class="fas fa-sign-out-alt"></i> Sair</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- ÁREA PRINCIPAL -->
+      <main class="main-content">
+        <!-- CABEÇALHO -->
+        <header class="header">
+          <div class="welcome-section">
+            <h1>Olá, !</h1>
+            <p class="current-date" id="currentDate"></p>
+          </div>
+          <div class="header-actions">
+            <button class="btn-notification">
+              <i class="fas fa-bell"></i>
+              <span class="badge">3</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- CARDS DE RESUMO -->
+        <section class="summary-cards">
+          <div class="card">
+            <div class="card-icon">
+              <i class="fas fa-wallet"></i>
+            </div>
+            <div class="card-content">
+              <h3>Saldo Atual</h3>
+              <p class="amount">R$ 15.750,00</p>
+              <span class="trend positive">+12.5%</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon">
+              <i class="fas fa-arrow-up"></i>
+            </div>
+            <div class="card-content">
+              <h3>Receitas do Mês</h3>
+              <p class="amount">R$ 8.450,00</p>
+              <span class="trend positive">+8.2%</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon">
+              <i class="fas fa-arrow-down"></i>
+            </div>
+            <div class="card-content">
+              <h3>Despesas do Mês</h3>
+              <p class="amount">R$ 3.200,00</p>
+              <span class="trend negative">-4.1%</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- GRÁFICO -->
+        <section class="chart-section">
+          <div class="chart-container">
+            <h2>Fluxo de Caixa</h2>
+            <canvas id="cashFlowChart"></canvas>
+          </div>
+        </section>
+
+        <!-- ATALHOS RÁPIDOS -->
+        <section class="quick-actions">
+          <h2>Ações Rápidas</h2>
+          <div class="action-buttons">
+            <button
+              class="action-btn"
+              onclick="window.location.href = 'financeiro.html'"
+            >
+              <i class="fas fa-plus-circle"></i>
+              <span>Nova Receita</span>
+            </button>
+            <button
+              class="action-btn"
+              onclick="window.location.href = 'financeiro.html'"
+            >
+              <i class="fas fa-minus-circle"></i>
+              <span>Nova Despesa</span>
+            </button>
+            <button
+              class="action-btn"
+              onclick="window.location.href = 'Produto.html'"
+            >
+              <i class="fas fa-box"></i>
+              <span>Adicionar Produto</span>
+            </button>
+            <button
+              class="action-btn"
+              onclick="window.location.href = 'assistente.html'"
+            >
+              <i class="fas fa-robot"></i>
+              <span>Assistente IA</span>
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="JS/app.js"></script>
+    <script>
+      // Data atual
+      document.getElementById("currentDate").textContent =
+        new Date().toLocaleDateString("pt-BR", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+
+      // Mobile Menu Toggle
+      const menuToggle = document.getElementById('menuToggle');
+      const sidebar = document.getElementById('sidebar');
+      const sidebarOverlay = document.getElementById('sidebarOverlay');
+      
+      function toggleMenu() {
+        sidebar.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+        sidebarOverlay.classList.toggle('active');
+      }
+      
+      menuToggle.addEventListener('click', toggleMenu);
+      sidebarOverlay.addEventListener('click', toggleMenu);
+      
+      // Close menu when clicking on a link (mobile)
+      document.querySelectorAll('.sidebar-nav a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth <= 768) {
+            toggleMenu();
+          }
+        });
+      });
+
+      // Gráfico de fluxo de caixa
+      const ctx = document.getElementById("cashFlowChart").getContext("2d");
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
+          datasets: [
+            {
+              label: "Receitas",
+              data: [6500, 7200, 6800, 8100, 8450, 7900],
+              borderColor: "#2E6BE6",
+              backgroundColor: "rgba(46, 107, 230, 0.1)",
+              tension: 0.4,
+            },
+            {
+              label: "Despesas",
+              data: [2800, 3200, 2900, 3500, 3200, 3100],
+              borderColor: "#E74C3C",
+              backgroundColor: "rgba(231, 76, 60, 0.1)",
+              tension: 0.4,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "top",
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function (value) {
+                  return "R$ " + value.toLocaleString("pt-BR");
+                },
+              },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
