@@ -1,0 +1,317 @@
+/* ---------- Reset ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- Variáveis ---------- */
+:root {
+  --color-bg:         #050d1a;
+  --color-surface:    #070f1f;
+  --color-surface-2:  #0a1628;
+  --color-border:     #0e2040;
+  --color-border-2:   #1e3a5f;
+
+  --color-blue:       #1464d4;
+  --color-blue-light: #5aa0f0;
+  --color-blue-dim:   #0c2348;
+
+  --color-text:       #ffffff;
+  --color-text-muted: #7a9bbf;
+  --color-text-dim:   #4a6a8a;
+
+  --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  --header-height: 56px;
+  --transition:    0.3s ease;
+}
+
+/* ---------- Base ---------- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-main);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* =============================================
+   HEADER
+   ============================================= */
+
+header {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 40px;
+
+  background: transparent;
+  border-bottom: 1px solid transparent;
+
+  transition:
+    background       var(--transition),
+    border-color     var(--transition),
+    backdrop-filter  var(--transition);
+}
+
+header.scrolled {
+  background: rgba(5, 13, 26, 0.92);
+  border-bottom-color: var(--color-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ---------- Logo ---------- */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-shrink: 0;
+}
+
+.logo img {
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
+  object-fit: contain;
+  background: var(--color-blue);
+  padding: 4px;
+}
+
+.logo-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: 0.3px;
+}
+
+/* ---------- Nav ---------- */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+}
+
+nav a {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  position: relative;
+  transition: color var(--transition);
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-blue);
+  transform: scaleX(0);
+  transition: transform var(--transition);
+}
+
+nav a:hover {
+  color: var(--color-text);
+}
+
+nav a:hover::after {
+  transform: scaleX(1);
+}
+
+nav a.active {
+  color: var(--color-text);
+}
+
+nav a.active::after {
+  transform: scaleX(1);
+}
+
+/* ---------- Ações ---------- */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+/* ---------- Busca ---------- */
+.header-search {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border-2);
+  border-radius: 50px;
+  padding: 0 14px;
+  height: 36px;
+  width: 230px;
+  transition: border-color var(--transition);
+}
+
+.header-search:focus-within {
+  border-color: var(--color-blue);
+}
+
+.header-search svg {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.header-search input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-text);
+  font-size: 13px;
+  font-family: var(--font-main);
+  width: 100%;
+  height: 100%;
+}
+
+.header-search input::placeholder {
+  color: var(--color-text-dim);
+}
+
+/* ---------- Idioma ---------- */
+.header-lang {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border-2);
+  border-radius: 8px;
+  padding: 0 12px;
+  height: 36px;
+  cursor: pointer;
+  transition: border-color var(--transition);
+  user-select: none;
+}
+
+.header-lang:hover {
+  border-color: var(--color-blue);
+}
+
+.header-lang > svg {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+#lang-selected {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+/* Setinha — gira quando aberto */
+.header-lang .arrow {
+  color: var(--color-text-dim);
+  transition: transform var(--transition);
+  flex-shrink: 0;
+}
+
+.header-lang.open .arrow {
+  transform: rotate(180deg);
+}
+
+/* Dropdown */
+.lang-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border-2);
+  border-radius: 10px;
+  overflow: hidden;
+  min-width: 160px;
+  z-index: 200;
+}
+
+.lang-dropdown.open {
+  display: block;
+}
+
+.lang-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  font-size: 13px;
+  color: var(--color-text-muted);
+  transition: background var(--transition), color var(--transition);
+  cursor: pointer;
+}
+
+.lang-option:hover {
+  background: var(--color-border);
+  color: var(--color-text);
+}
+
+.lang-option.active {
+  color: var(--color-blue-light);
+  background: var(--color-blue-dim);
+}
+
+/* ---------- Botões ---------- */
+.btn-login {
+  background: transparent;
+  border: 1px solid var(--color-border-2);
+  color: var(--color-blue-light);
+  height: 36px;
+  padding: 0 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-main);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.btn-login:hover {
+  border-color: var(--color-blue);
+  background: var(--color-blue-dim);
+}
+
+.btn-primario {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-blue);
+  border: none;
+  color: #fff;
+  height: 36px;
+  padding: 0 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-main);
+  cursor: pointer;
+  transition: background var(--transition), transform 0.15s;
+}
+
+.btn-primario:hover {
+  background: #1a74f0;
+}
+
+.btn-primario:active {
+  transform: scale(0.97);
+}
