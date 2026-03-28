@@ -1,0 +1,160 @@
+/* =============================================
+   RUNWISE — footer.css
+   Usa as variáveis definidas no style.css
+   ============================================= */
+
+footer {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding: 48px 60px 0;
+}
+
+/* ---------- Topo do footer: logo + redes sociais ---------- */
+.footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-logo img {
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
+  background: var(--color-blue);
+  padding: 4px;
+  object-fit: contain;
+}
+
+.footer-logo-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: 0.3px;
+}
+
+.footer-social-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-social-icons a {
+  color: var(--color-text-dim);
+  transition: color var(--transition);
+  display: flex;
+  align-items: center;
+}
+
+.footer-social-icons a:hover {
+  color: var(--color-text);
+}
+
+.footer-social-icons svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ---------- Meio do footer: colunas de links ---------- */
+.footer-cols {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 40px;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.footer-col h4 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 16px;
+  letter-spacing: 0.3px;
+}
+
+.footer-col a,
+.footer-col p {
+  display: block;
+  font-size: 13px;
+  color: var(--color-text-dim);
+  margin-bottom: 10px;
+  transition: color var(--transition);
+}
+
+.footer-col a:hover {
+  color: var(--color-text);
+}
+
+/* ---------- Fundo do footer: copyright + botão topo ---------- */
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.footer-bottom-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-bottom-links p {
+  font-size: 12px;
+  color: var(--color-text-dim);
+}
+
+.footer-bottom-links a {
+  font-size: 12px;
+  color: var(--color-text-dim);
+  transition: color var(--transition);
+}
+
+.footer-bottom-links a:hover {
+  color: var(--color-text);
+}
+
+.footer-bottom-links span {
+  color: var(--color-border-2);
+  font-size: 12px;
+}
+
+/* Botão voltar ao topo */
+#btn-topo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border-2);
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-family: var(--font-main);
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition), background var(--transition);
+}
+
+#btn-topo:hover {
+  border-color: var(--color-blue);
+  color: var(--color-text);
+  background: var(--color-blue-dim);
+}
+
+#btn-topo svg {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--transition);
+}
+
+#btn-topo:hover svg {
+  transform: translateY(-2px);
+}
