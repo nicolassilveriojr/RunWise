@@ -1,67 +1,170 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aplicativo RunWise</title>
-    <link rel="stylesheet" href="../App/CSS/app.style.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RunWise — Login</title>
+  <link rel="stylesheet" href="../App/css/login.css" />
+</head>
+<body>
 
-    <!-- ícons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-    <!--Google Fonts-->
-    >
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+  <div class="bg-glow-2"></div>
 
-  <body>
-    <h1>Teste da API</h1>
-    <div id="resultado">Carregando...</div>
+  <div class="container">
 
-    <!--TELA DE LOGUIN-->
-    <div class="login-container">
-      <div class="login-logo">
-        <img src="Assets/colocar imagem da logo" alt="RunWise" />
-        <p>Gerenciamento Empresarial Inteligente</p>
+    <!-- Logo -->
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
       </div>
-
-      <!--CAIXA DE LOGIN-->
-      <div class="login-box">
-        <h2>Bem-Vindo de volta!</h2>
-
-        <!--CAMPO DE EMAIL-->
-        <div class="input-group">
-          <i class="fas fa-envelope"></i>
-          <input type="email" id="email" placeholder="Seu E-mail" />
-        </div>
-
-        <!--CAMPO DE SENHA-->
-        <div class="input-group">
-          <i class="fas fa-lock"></i>
-          <input type="password" id="senha" placeholder="Sua senha" />
-        </div>
-
-        <!--LINK ESQUECI SENHA-->
-        <a href="#" class="esqueci-senha">Esqueci minha senha</a>
-
-        <!--BOTÃO ENTRA-->
-        <button id="btn-entra" class="btn-primario">Entra</button>
-
-        <!--SEPARADOR-->
-        <div class="separador">
-          <span>OU</span>
-        </div>
-
-        <!--BOTÃO CRIAR CONTA-->
-        <button id="btn-cadastro" class="btn-cadastro">Criar conta</button>
-      </div>
+      <span class="logo-name">RunWise</span>
     </div>
 
-    <script src="JS/app.js"></script>
-  </body>
+    <!-- Card -->
+    <div class="card">
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab active" onclick="trocarTab('login')">Entrar</button>
+        <button class="tab" onclick="trocarTab('cadastro')">Criar conta</button>
+      </div>
+
+      <!-- === LOGIN === -->
+      <div id="form-login" class="form-section active">
+        <p class="card-title">Bem-vindo de volta</p>
+        <p class="card-subtitle">Entre com sua conta para acessar o painel.</p>
+
+        <div class="form">
+          <!-- Erro -->
+          <div class="erro-msg" id="erro-login">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <span id="erro-login-txt">Email ou senha incorretos.</span>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label class="form-label">E-mail</label>
+            <div class="input-wrap">
+              <span class="input-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </span>
+              <input type="email" class="form-input" id="login-email" placeholder="seu@email.com" autocomplete="email" />
+            </div>
+          </div>
+
+          <!-- Senha -->
+          <div class="form-group">
+            <label class="form-label">Senha</label>
+            <div class="input-wrap">
+              <span class="input-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </span>
+              <input type="password" class="form-input" id="login-senha" placeholder="Sua senha" autocomplete="current-password" />
+              <button class="toggle-senha" type="button" onclick="toggleSenha('login-senha', this)" tabindex="-1">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <button class="btn-submit" id="btn-login" onclick="fazerLogin()">
+            <span class="btn-text">Entrar</span>
+            <div class="spinner"></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- === CADASTRO === -->
+      <div id="form-cadastro" class="form-section">
+        <p class="card-title">Criar sua conta</p>
+        <p class="card-subtitle">Preencha os dados para começar a usar o RunWise.</p>
+
+        <div class="form">
+          <!-- Erro cadastro -->
+          <div class="erro-msg" id="erro-cadastro">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <span id="erro-cadastro-txt">Preencha todos os campos.</span>
+          </div>
+
+          <!-- Nome -->
+          <div class="form-group">
+            <label class="form-label">Nome da empresa</label>
+            <div class="input-wrap">
+              <span class="input-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+              </span>
+              <input type="text" class="form-input" id="cad-nome" placeholder="Nome da sua empresa" autocomplete="organization" />
+            </div>
+          </div>
+
+          <!-- Email cadastro -->
+          <div class="form-group">
+            <label class="form-label">E-mail</label>
+            <div class="input-wrap">
+              <span class="input-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </span>
+              <input type="email" class="form-input" id="cad-email" placeholder="seu@email.com" autocomplete="email" />
+            </div>
+          </div>
+
+          <!-- Senha cadastro -->
+          <div class="form-group">
+            <label class="form-label">Senha</label>
+            <div class="input-wrap">
+              <span class="input-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </span>
+              <input type="password" class="form-input" id="cad-senha" placeholder="Mínimo 8 caracteres" autocomplete="new-password" oninput="verificarForca(this.value)" />
+              <button class="toggle-senha" type="button" onclick="toggleSenha('cad-senha', this)" tabindex="-1">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
+            <!-- Força da senha -->
+            <div class="senha-forca" id="senha-forca">
+              <div class="forca-barra" id="fb1"></div>
+              <div class="forca-barra" id="fb2"></div>
+              <div class="forca-barra" id="fb3"></div>
+              <div class="forca-barra" id="fb4"></div>
+            </div>
+          </div>
+
+          <button class="btn-submit" id="btn-cadastro" onclick="fazerCadastro()">
+            <span class="btn-text">Criar conta</span>
+            <div class="spinner"></div>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="card-footer" style="margin-top: 20px;">
+      &copy; 2026 RunWise — EPT PR
+    </p>
+
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
 </html>

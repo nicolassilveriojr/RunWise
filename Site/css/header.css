@@ -82,25 +82,31 @@ header.scrolled {
 .logo {
   display: flex;
   align-items: center;
-  gap: 15px;
-  flex-shrink: 0;
+  gap: 12px;
+  margin-bottom: 40px;
+  justify-content: center;
 }
 
-.logo img {
-  width: 32px;
-  height: 32px;
-  border-radius: 7px;
-  object-fit: contain;
-  background: var(--color-blue);
-  padding: 4px;
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--blue);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.logo-icon svg { width: 22px; height: 22px; color: white; }
 
 .logo-name {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--color-text);
-  letter-spacing: 0.3px;
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.5px;
 }
+
 
 /* ---------- Nav ---------- */
 nav {

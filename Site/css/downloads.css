@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* AS MESMAS CORES DA TELA DE LOGIN */
+  --bg:          #050d1a;
+  --surface:     #080f1e;
+  --surface-2:   #0c1525;
+  --border:      #0e2040;
+  --border-2:    #1a3560;
+  --blue:        #1464d4;
+  --blue-light:  #5aa0f0;
+  --blue-dim:    #0c2348;
+  --blue-glow:   rgba(20, 100, 212, 0.25);
+  --text:        #ffffff;
+  --text-muted:  #7a9bbf;
+  --text-dim:    #3a5a7a;
+  --font-head:   'Syne', sans-serif;
+  --font-body:   'DM Sans', sans-serif;
+  --ease:        cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden; /* Evita barra de rolagem horizontal */
+  position: relative;
+  padding: 40px 20px;
+}
+
+/* ---------- Efeitos de Fundo ---------- */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.bg-glow, .bg-glow-2 {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.bg-glow {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(20,100,212,0.12) 0%, transparent 70%);
+  top: -200px; right: -100px;
+  animation: float 8s ease-in-out infinite;
+}
+
+.bg-glow-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(20,100,212,0.08) 0%, transparent 70%);
+  bottom: -100px; left: -100px;
+  animation: float 10s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-30px); }
+}
+
+/* ---------- Container Principal ---------- */
+.container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 700px; /* Mais largo para caber os dois cartões */
+  animation: fadeUp 0.6s var(--ease) both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Logo ---------- */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+  justify-content: center;
+}
+
+.logo-icon {
+  width: 40px; height: 40px;
+  background: var(--blue);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.logo-icon svg { width: 22px; height: 22px; color: white; }
+
+.logo-name {
+  font-family: var(--font-head);
+  font-size: 22px; font-weight: 800;
+  color: var(--text); letter-spacing: -0.5px;
+}
+
+/* ---------- Cabeçalho da Página ---------- */
+.page-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.page-title {
+  font-family: var(--font-head);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+.page-subtitle {
+  font-size: 15px;
+  color: var(--text-muted);
+  max-width: 400px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* ---------- Grid de Downloads ---------- */
+.download-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+/* ---------- Cartões de Download ---------- */
+.download-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 40px 30px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s;
+}
+
+.download-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blue), transparent);
+  opacity: 0.6;
+}
+
+.download-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--border-2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--blue-glow);
+}
+
+.card-icon {
+  width: 64px;
+  height: 64px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: var(--blue-light);
+  transition: color 0.3s, background 0.3s;
+}
+
+.download-card:hover .card-icon {
+  background: var(--blue-dim);
+  color: #fff;
+}
+
+.card-icon svg { width: 32px; height: 32px; }
+
+.card-title {
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.card-info {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+
+/* ---------- Botão de Download ---------- */
+.btn-download {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s var(--ease);
+}
+
+.btn-download svg { width: 18px; height: 18px; color: var(--text-muted); transition: color 0.2s; }
+
+.btn-download:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+  box-shadow: 0 6px 20px var(--blue-glow);
+}
+
+.btn-download:hover svg { color: #fff; }
+.btn-download:active { transform: scale(0.97); }
+
+/* ---------- Link de Voltar ---------- */
+.footer-link { text-align: center; }
+
+.footer-link a {
+  color: var(--blue-light);
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-link a:hover { color: #fff; }
